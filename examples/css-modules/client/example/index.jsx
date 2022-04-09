@@ -10,8 +10,6 @@ import App from './component';
  * @extends {React.Component}
  */
 export default class View extends React.Component {
-  static doctype = '<!DOCTYPE html>';
-
   /**
    * Partial Render for view template
    * return a props mapping object, every React instance will be rendered into String
@@ -46,6 +44,8 @@ export default class View extends React.Component {
       app: <App />,
     };
   }
+
+  static doctype = '<!DOCTYPE html>';
 
   render() {
     const { app, helper } = this.props;

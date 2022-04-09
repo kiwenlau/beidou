@@ -15,8 +15,6 @@ import './view.css';
  * @extends {React.Component}
  */
 export default class View extends React.Component {
-  static doctype = '<!DOCTYPE html>';
-
   /**
    * construct store for server side
    */
@@ -57,6 +55,8 @@ export default class View extends React.Component {
     const html = <TodoApp todoStore={store} viewStore={viewStore} />;
     return { html };
   }
+
+  static doctype = '<!DOCTYPE html>';
 
   render() {
     const { html, state, helper } = this.props;

@@ -42,16 +42,15 @@ class WebpackFactory extends Factory {
     const factories = Object.getPrototypeOf(this).__envFactories;
     if (factories[env]) {
       return factories[env];
-    } else {
-      const factory = new WebpackFactory(
-        Object.assign({}, this.__webpackConfig),
-        Object.assign({}, this.__plugins),
-        [].concat(this.__rules)
-      );
-      factory.env = env;
-      Object.getPrototypeOf(this).__envFactories[env] = factory;
-      return factory;
     }
+    const factory = new WebpackFactory(
+      Object.assign({}, this.__webpackConfig),
+      Object.assign({}, this.__plugins),
+      [].concat(this.__rules)
+    );
+    factory.env = env;
+    Object.getPrototypeOf(this).__envFactories[env] = factory;
+    return factory;
   }
 
   getEnv() {
@@ -143,9 +142,8 @@ class WebpackFactory extends Factory {
       return filter(keyData);
     } else if (is.string(filter) || is.number(filter)) {
       return keyData[filter];
-    } else {
-      return null;
     }
+    return null;
   }
 
   addPlugin(...args) {
@@ -154,9 +152,8 @@ class WebpackFactory extends Factory {
         const plugin = this.usePlugin(args[0]);
         this.__plugins[plugin.alias] = plugin;
         return this;
-      } else {
-        throw new Error(`${args[0]} the plugin alias not exsit! `);
       }
+      throw new Error(`${args[0]} the plugin alias not exsit! `);
     }
     if (args.length === 1 && args[0].constructor === Plugin) {
       const plugin = args[0];
@@ -179,9 +176,8 @@ class WebpackFactory extends Factory {
         }
       }
       return null;
-    } else {
-      throw new Error('get plugin param type exception!');
     }
+    throw new Error('get plugin param type exception!');
   }
 
   setPlugin(...args) {
@@ -207,9 +203,8 @@ class WebpackFactory extends Factory {
       return definePlugins[filter];
     } else if (is.function(filter)) {
       return filter(Object.values(definePlugins));
-    } else {
-      throw new Error('use plugin param type exception!');
     }
+    throw new Error('use plugin param type exception!');
   }
 
   getDefinePlugins() {
@@ -226,9 +221,8 @@ class WebpackFactory extends Factory {
       if (this.useRule(alias)) {
         this.__rules.push(this.useRule(alias));
         return this;
-      } else {
-        throw new Error(`${args[0]} the rule alias not exsit! `);
       }
+      throw new Error(`${args[0]} the rule alias not exsit! `);
     }
 
     if (args.length === 1 && args[0].constructor === Rule) {
@@ -243,27 +237,25 @@ class WebpackFactory extends Factory {
 
   getRule(params) {
     if (is.string(params)) {
-      return this.__rules.find(
-        v => {
-          if (v.alias === params) {
+      return this.__rules.find((v) => {
+        if (v.alias === params) {
+          return true;
+        }
+        if (v.options && v.options.test) {
+          const regexps = v.options.test;
+
+          if (Array.isArray(regexps)) {
+            for (const regexp of regexps) {
+              if (regexp.test && regexp.test(params)) {
+                return true;
+              }
+            }
+          } else if (regexps instanceof RegExp && regexps.test(params)) {
             return true;
           }
-          if (v.options && v.options.test) {
-            const regexps = v.options.test;
-
-            if (Array.isArray(regexps)) {
-              for (const regexp of regexps) {
-                if (regexp.test && regexp.test(params)) {
-                  return true;
-                }
-              }
-            } else if (regexps instanceof RegExp && regexps.test(params)) {
-              return true;
-            }
-          }
-          return false;
         }
-      );
+        return false;
+      });
     } else if (is.function(params)) {
       for (const rule of this.__rules) {
         if (params(rule)) {
@@ -275,9 +267,8 @@ class WebpackFactory extends Factory {
       return this.__rules.find(
         v => v.options.test.toString() === params.toString()
       );
-    } else {
-      throw new Error('get rule param type exception!');
     }
+    throw new Error('get rule param type exception!');
   }
 
   setRule(...args) {

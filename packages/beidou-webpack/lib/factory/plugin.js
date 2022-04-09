@@ -26,9 +26,8 @@ class Plugin {
       return this.object;
     } else if (this.options) {
       return new this.class(this.options);
-    } else {
-      return new this.class();
     }
+    return new this.class();
   }
 }
 

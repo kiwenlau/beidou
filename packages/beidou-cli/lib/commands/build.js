@@ -36,7 +36,7 @@ module.exports = class BuildCMD extends Command {
       () => require.resolve('beidou-webpack/bin/build'),
     ];
     const customBuildPath = context.argv.customBuildPath || '';
-    if(customBuildPath) {
+    if (customBuildPath) {
       buildPaths.unshift(path.join(context.cwd, customBuildPath));
     }
     const buildBin = buildPaths.find(p =>

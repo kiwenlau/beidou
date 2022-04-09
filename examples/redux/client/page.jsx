@@ -14,8 +14,6 @@ import { run } from './saga';
  * @extends {React.Component}
  */
 export default class View extends React.Component {
-  static doctype = '<!DOCTYPE html>';
-
   /**
    * construct store for server side
    */
@@ -58,6 +56,8 @@ export default class View extends React.Component {
     );
     return { html };
   }
+
+  static doctype = '<!DOCTYPE html>';
 
   render() {
     const { html, state, helper } = this.props;

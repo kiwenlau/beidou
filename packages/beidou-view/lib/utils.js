@@ -25,9 +25,8 @@ exports.getAssetManifest = function (hashAssetPath) {
   if (fs.existsSync(hashAssetPath)) {
     const raw = fs.readFileSync(hashAssetPath, { encoding: 'utf8' });
     return JSON.parse(raw);
-  } else {
-    throw new Error(
-      `Cannot find ${hashAssetPath}! Please check view.hashAssetPath config.`
-    );
   }
+  throw new Error(
+    `Cannot find ${hashAssetPath}! Please check view.hashAssetPath config.`
+  );
 };

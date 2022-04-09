@@ -68,9 +68,9 @@ const lessLoaderConfig = {
   },
 };
 
-
 function getStyleCongfigs(dev, options) {
-  const extractLoader = { loader: MiniCssExtractPlugin.loader,
+  const extractLoader = {
+    loader: MiniCssExtractPlugin.loader,
     options: {
       hmr: dev,
     },
@@ -93,42 +93,26 @@ function getStyleCongfigs(dev, options) {
       }
       if (factory.cssExtract) {
         return {
-          use: [
-            extractLoader,
-            ...use,
-          ],
-        };
-      } else {
-        return {
-          use: [
-            styleLoader,
-            ...use,
-          ],
+          use: [extractLoader, ...use],
         };
       }
+      return {
+        use: [styleLoader, ...use],
+      };
     };
 
     return rule;
   };
 
-
   const loaders = [
     dynamicProcessor({
       test: /\.css$/,
       exclude: /\.m(odule)?\.css$/,
-      use: [
-        defaultLoader,
-        getCssLoaderConfig(dev),
-        postCssLoaderConfig,
-      ],
+      use: [defaultLoader, getCssLoaderConfig(dev), postCssLoaderConfig],
     }),
     dynamicProcessor({
       test: /\.m(odule)?\.css$/,
-      use: [
-        defaultLoader,
-        getCssLoaderConfig(dev, true),
-        postCssLoaderConfig,
-      ],
+      use: [defaultLoader, getCssLoaderConfig(dev, true), postCssLoaderConfig],
     }),
     dynamicProcessor({
       test: /\.less$/,
