@@ -43,7 +43,7 @@ clean-test:
 	rm -rf packages/*/test/**/.isomorphic
 
 test:
-	make lint
+	# make lint
 	./scripts/test.sh
 	make clean-test
 
