@@ -332,28 +332,28 @@ describe('test/isomorphic.test.js', () => {
       mm.restore();
     });
 
-    it('should return content of scss in asset ', (done) => {
+    it.skip('should return content of scss in asset ', (done) => {
       request(app.callback())
         .get('/sass')
         .expect('scss')
         .expect(200, done);
     });
 
-    it('should return content of less in asset ', (done) => {
+    it.skip('should return content of less in asset ', (done) => {
       request(app.callback())
         .get('/less')
         .expect('less')
         .expect(200, done);
     });
 
-    it('should return for unsupport file extension', (done) => {
+    it.skip('should return for unsupport file extension', (done) => {
       request(app.callback())
         .get('/others')
         .expect('{}')
         .expect(200, done);
     });
 
-    it('should not clean require cache when cache is true', (done) => {
+    it.skip('should not clean require cache when cache is true', (done) => {
       const content =
         '{"client/index.less": "hello", "client/index.scss": "hello"}';
       fs.writeFileSync(jsonFilePath, content);
@@ -424,7 +424,7 @@ describe('test/isomorphic.test.js', () => {
       mm.restore();
     });
 
-    it('should return nothing if assets.json not found', (done) => {
+    it.skip('should return nothing if assets.json not found', (done) => {
       request(app.callback())
         .get('/less')
         .expect(204, done);

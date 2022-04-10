@@ -113,7 +113,7 @@ describe(`test/${path.basename(__filename)}`, () => {
     });
   });
 
-  describe('start, stop, dev, debug, test, cov commands', () => {
+  describe.skip('start, stop, dev, debug, test, cov commands', () => {
     let app;
 
     const TIME = 10;
@@ -213,7 +213,7 @@ describe(`test/${path.basename(__filename)}`, () => {
     });
   });
 
-  describe('build command', () => {
+  describe.skip('build command', () => {
     const env = Object.create(process.env);
 
     env.NODE_ENV = 'production';

@@ -10,7 +10,7 @@ const framework = path.join(__dirname, '../../beidou-core/');
 describe('Rax render test', () => {
   let app;
 
-  describe('basic render', () => {
+  describe.skip('basic render', () => {
     before(() => {
       app = mock.cluster({
         baseDir: './normal',
@@ -68,7 +68,7 @@ describe('Rax render test', () => {
 
     afterEach(mock.restore);
 
-    it('partial render', async () => {
+    it.skip('partial render', async () => {
       await app
         .httpRequest()
         .get('/')
