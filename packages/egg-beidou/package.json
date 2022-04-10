@@ -37,7 +37,7 @@
     "ci": "npm run lint && npm run cov",
     "cov": "egg-bin cov",
     "lint": "eslint .",
-    "test": "npm run lint && npm run test-local",
+    "test": "npm run test-local",
     "test-local": "egg-bin test --full-trace"
   },
   "engines": {
