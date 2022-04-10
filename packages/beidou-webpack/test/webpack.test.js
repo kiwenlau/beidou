@@ -119,7 +119,7 @@ describe('test/webpack.test.js', () => {
 
 
 
-  describe.skip('customer webpack config => function mode', () => {
+  describe('customer webpack config => function mode', () => {
     let app;
     const output = path.join(__dirname, './fixtures/custom-webpack-function/build');
     before((done) => {
@@ -146,13 +146,13 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it.skip('should exist build files', (done) => {
+    it('should exist build files', (done) => {
       const exist = fs.existsSync(path.join(output, 'index.js'));
       expect(exist).to.equal(true);
       done();
     });
 
-    it.skip('should modify the css module plugin ', (done) => {
+    it('should modify the css module plugin ', (done) => {
       const example = fs.existsSync(path.join(output, 'example.css'));
       expect(example).to.equal(false);
       const exist = fs.existsSync(path.join(output, 'example.modify.css'));
@@ -161,7 +161,7 @@ describe('test/webpack.test.js', () => {
     });
   })
 
-  describe.skip('customer webpack config => disable css mini plugin', () => {
+  describe('customer webpack config => disable css mini plugin', () => {
     let app;
     const output = path.join(__dirname, './fixtures/custom-webpack-css-extract/build');
     before((done) => {
@@ -188,20 +188,20 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it.skip('should exist build files', (done) => {
+    it('should exist build files', (done) => {
       const exist = fs.existsSync(path.join(output, 'index.js'));
       expect(exist).to.equal(true);
       done();
     });
 
-    it.skip('should disable the css module plugin ', (done) => {
+    it('should disable the css module plugin ', (done) => {
       const example = fs.existsSync(path.join(output, 'example.css'));
       expect(example).to.equal(false);
       done();
     });
   })
 
-  describe.skip('customer webpack config => disable css mini plugin with factory', () => {
+  describe('customer webpack config => disable css mini plugin with factory', () => {
     let app;
     const output = path.join(__dirname, './fixtures/factory-webpack-css-extract/build');
     before((done) => {
@@ -228,13 +228,13 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it.skip('should exist build files', (done) => {
+    it('should exist build files', (done) => {
       const exist = fs.existsSync(path.join(output, 'index.js'));
       expect(exist).to.equal(true);
       done();
     });
 
-    it.skip('should disable the css module plugin ', (done) => {
+    it('should disable the css module plugin ', (done) => {
       const example = fs.existsSync(path.join(output, 'example.css'));
       expect(example).to.equal(false);
       done();
@@ -305,7 +305,7 @@ describe('test/webpack.test.js', () => {
     });
   });
 
-  describe('webpack build', () => {
+  describe.skip('webpack build', () => {
     const output = path.join(__dirname, './fixtures/webpack-build/output');
     let app;
     before((done) => {
@@ -333,7 +333,7 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it.skip('should exist output files', (done) => {
+    it('should exist output files', (done) => {
       expect(fs.existsSync(path.join(output, 'index.js'))).to.equal(true);
       expect(fs.existsSync(path.join(output, 'bar.js'))).to.equal(true);
       expect(fs.existsSync(path.join(output, 'foo.js'))).to.equal(true);
@@ -429,7 +429,7 @@ describe('test/webpack.test.js', () => {
 
   });
 
-  describe.skip('isomorphic plugin', () => {
+  describe('isomorphic plugin', () => {
     const output = path.join(__dirname, './fixtures/isomorphic/output');
     let app;
     before((done) => {
