@@ -90,7 +90,7 @@
     "node": ">= 8.0.0"
   },
   "scripts": {
-    "test": "TEST_REPORTER=spec egg-bin test",
+    "test": "NODE_OPTIONS=--no-warnings TEST_REPORTER=spec egg-bin test",
     "cov": "TEST_REPORTER=spec egg-bin cov",
     "history": "egg-bin history CHANGELOG.md"
   },
