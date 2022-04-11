@@ -305,7 +305,7 @@ describe('test/webpack.test.js', () => {
     });
   });
 
-  describe.skip('webpack build', () => {
+  describe.only('webpack build', () => {
     const output = path.join(__dirname, './fixtures/webpack-build/output');
     let app;
     before((done) => {
@@ -319,7 +319,20 @@ describe('test/webpack.test.js', () => {
         const builder = require('../lib/builder');
         app.config.env = 'prod';
         const compiler = builder(app);
-        compiler.run(done);
+        console.log({ compiler });
+        compiler.run((err, stats) => {
+          console.log(`stats.hasWarnings: ${stats.hasWarnings()}`);
+          console.log(`stats.hasErrors: ${stats.hasErrors()}`);
+          if (err || stats.hasErrors() || stats.hasWarnings()) {
+            console.log({ err, stats });
+            done(err);
+          } else {
+            console.log('build success!');
+            expect(fs.existsSync(path.join(output, 'index.js'))).to.equal(true);
+            console.log(stats.toJson());
+            done();
+          }
+        });
       });
     });
 
@@ -357,7 +370,12 @@ describe('test/webpack.test.js', () => {
         const builder = require('../lib/builder');
         app.config.env = 'prod';
         const compiler = builder(app);
-        compiler.run(done);
+        compiler.run((err, stats) => {
+          if (err || stats.hasErrors()) {
+            console.log({ err, stats });
+            done(err);
+          } else done();
+        });
       });
     });
 
@@ -401,7 +419,12 @@ describe('test/webpack.test.js', () => {
         const builder = require('../lib/builder');
         app.config.env = 'prod';
         const compiler = builder(app);
-        compiler.run(done);
+        compiler.run((err, stats) => {
+          if (err || stats.hasErrors()) {
+            console.log({ err, stats });
+            done(err);
+          } else done();
+        });
       });
     });
 
