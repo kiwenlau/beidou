@@ -37,7 +37,7 @@ module.exports = appInfo => ({
           },
         },
       },
-      noEmitOnErrors: true,
+      emitOnErrors: false,
     },
 
     devServer: {
