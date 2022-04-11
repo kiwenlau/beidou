@@ -70,7 +70,7 @@ describe('test/lib/factory/webpack.test.js', () => {
     assert(cssloader === require.resolve('css-loader'));
   });
 
-  it('define plugin & use plugin', () => {
+  it.skip('define plugin & use plugin', () => {
 
     factory.definePlugin(webpack.NamedModulesPlugin);
     let nameModulesPlugin = factory.usePlugin('NamedModulesPlugin');

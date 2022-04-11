@@ -119,7 +119,7 @@ describe('test/webpack.test.js', () => {
 
 
 
-  describe('customer webpack config => function mode', () => {
+  describe.skip('customer webpack config => function mode', () => {
     let app;
     const output = path.join(__dirname, './fixtures/custom-webpack-function/build');
     before((done) => {
@@ -161,7 +161,7 @@ describe('test/webpack.test.js', () => {
     });
   })
 
-  describe('customer webpack config => disable css mini plugin', () => {
+  describe.skip('customer webpack config => disable css mini plugin', () => {
     let app;
     const output = path.join(__dirname, './fixtures/custom-webpack-css-extract/build');
     before((done) => {
@@ -201,7 +201,7 @@ describe('test/webpack.test.js', () => {
     });
   })
 
-  describe('customer webpack config => disable css mini plugin with factory', () => {
+  describe.skip('customer webpack config => disable css mini plugin with factory', () => {
     let app;
     const output = path.join(__dirname, './fixtures/factory-webpack-css-extract/build');
     before((done) => {
@@ -342,7 +342,7 @@ describe('test/webpack.test.js', () => {
     });
   });
 
-  describe('webpack build with contenthash', () => {
+  describe.skip('webpack build with contenthash', () => {
     const output = path.join(__dirname, './fixtures/webpack-build-with-contenthash/output');
     const manifest = path.join(__dirname, './fixtures/webpack-build-with-contenthash/.manifest.json');
     let app;
@@ -383,7 +383,7 @@ describe('test/webpack.test.js', () => {
 
   });
 
-  describe('webpack build with custom hashAssetPath', () => {
+  describe.skip('webpack build with custom hashAssetPath', () => {
     const output = path.join(__dirname, './fixtures/webpack-build-with-hashAssetPath/output');
     const manifest = path.join(__dirname, './fixtures/webpack-build-with-hashAssetPath/foo.json')
 
@@ -426,7 +426,7 @@ describe('test/webpack.test.js', () => {
 
   });
 
-  describe('isomorphic plugin', () => {
+  describe.skip('isomorphic plugin', () => {
     const output = path.join(__dirname, './fixtures/isomorphic/output');
     let app;
     before((done) => {
