@@ -41,7 +41,7 @@ exports.webpack = {
   },
   output: {
     path: './build',
-    filename: '[name].js?[hash]',
+    filename: '[name].js?[contenthash]',
     chunkFilename: '[name].js',
     publicPath: './build',
   },
@@ -107,7 +107,7 @@ module.exports = (app, defaultConfig, dev, target) => {
 module.exports = {
   output: {
     path: './build',
-    filename: '[name].js?[hash]',
+    filename: '[name].js?[contenthash]',
     chunkFilename: '[name].js',
     publicPath: './build',
   },
@@ -155,7 +155,7 @@ module.exports = {
 
 上述配置下，以 `/foo` 开头的所有请求均会直接转发给 webpack，用于使用了 devServer.proxy 的场景
 
-**custom.cssExtract**: 是否开启css抽离插件
+**custom.cssExtract**: 是否开启 css 抽离插件
 
 ### 常见配置问题
 
@@ -270,7 +270,7 @@ module.exports = (app, defaultConfig, dev, target) => {
   // 设置 webpack output 的值，方式如下:
   factory.set('output',{
       path: outputPath,
-      filename: '[name].js?[hash]',
+      filename: '[name].js?[contenthash]',
       chunkFilename: '[name].js',
       publicPath: '/build/',
   })
@@ -283,7 +283,7 @@ module.exports = (app, defaultConfig, dev, target) => {
   })
   // factory.get('output'): {
   //     path: outputPath,
-  //     filename: '[name].js?[hash]',
+  //     filename: '[name].js?[contenthash]',
   //     chunkFilename: '[name].js',
   //     publicPath: '/build/',
   //     hashDigestLength: 10

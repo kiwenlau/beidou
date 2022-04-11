@@ -40,11 +40,11 @@ exports.webpack = {
     // configPath: 'path/to/webpack/config/file',
     // depth: 1,
     // proxy: null,
-    cssExtract: true,  // default enable css-mini-plugin config
+    cssExtract: true, // default enable css-mini-plugin config
   },
   output: {
     path: './build',
-    filename: '[name].js?[hash]',
+    filename: '[name].js?[contenthash]',
     chunkFilename: '[name].js',
     publicPath: './build',
   },
@@ -108,7 +108,7 @@ module.exports = (app, defaultConfig, dev, target) => {
 module.exports = {
   output: {
     path: './build',
-    filename: '[name].js?[hash]',
+    filename: '[name].js?[contenthash]',
     chunkFilename: '[name].js',
     publicPath: './build',
   },
@@ -172,7 +172,7 @@ module.exports = (app, defaultConfig, dev, target) => {
   // set the value of output in webpack :
   factory.set('output',{
       path: outputPath,
-      filename: '[name].js?[hash]',
+      filename: '[name].js?[contenthash]',
       chunkFilename: '[name].js',
       publicPath: '/build/',
   })
@@ -185,7 +185,7 @@ module.exports = (app, defaultConfig, dev, target) => {
   })
   // factory.get('output'): {
   //     path: outputPath,
-  //     filename: '[name].js?[hash]',
+  //     filename: '[name].js?[contenthash]',
   //     chunkFilename: '[name].js',
   //     publicPath: '/build/',
   //     hashDigestLength: 10
