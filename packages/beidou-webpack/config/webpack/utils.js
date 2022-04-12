@@ -49,15 +49,17 @@ const postCssLoaderConfig = {
   loader: require.resolve('postcss-loader'),
   options: {
     // Necessary for external CSS imports to work
-    ident: 'postcss',
-    plugins: () => [
-      require('postcss-flexbugs-fixes'),
-      autoprefixer({
-        // browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
-        // please set browserslist in package.json
-        flexbox: 'no-2009',
-      }),
-    ],
+    postcssOptions: {
+      ident: 'postcss',
+      plugins: () => [
+        require('postcss-flexbugs-fixes'),
+        autoprefixer({
+          // browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
+          // please set browserslist in package.json
+          flexbox: 'no-2009',
+        }),
+      ],
+    },
   },
 };
 
@@ -68,9 +70,9 @@ const lessLoaderConfig = {
   },
 };
 
-
 function getStyleCongfigs(dev, options) {
-  const extractLoader = { loader: MiniCssExtractPlugin.loader,
+  const extractLoader = {
+    loader: MiniCssExtractPlugin.loader,
     options: {
       hmr: dev,
     },
@@ -93,17 +95,11 @@ function getStyleCongfigs(dev, options) {
       }
       if (factory.cssExtract) {
         return {
-          use: [
-            extractLoader,
-            ...use,
-          ],
+          use: [extractLoader, ...use],
         };
       } else {
         return {
-          use: [
-            styleLoader,
-            ...use,
-          ],
+          use: [styleLoader, ...use],
         };
       }
     };
@@ -111,24 +107,15 @@ function getStyleCongfigs(dev, options) {
     return rule;
   };
 
-
   const loaders = [
     dynamicProcessor({
       test: /\.css$/,
       exclude: /\.m(odule)?\.css$/,
-      use: [
-        defaultLoader,
-        getCssLoaderConfig(dev),
-        postCssLoaderConfig,
-      ],
+      use: [defaultLoader, getCssLoaderConfig(dev), postCssLoaderConfig],
     }),
     dynamicProcessor({
       test: /\.m(odule)?\.css$/,
-      use: [
-        defaultLoader,
-        getCssLoaderConfig(dev, true),
-        postCssLoaderConfig,
-      ],
+      use: [defaultLoader, getCssLoaderConfig(dev, true), postCssLoaderConfig],
     }),
     dynamicProcessor({
       test: /\.less$/,
