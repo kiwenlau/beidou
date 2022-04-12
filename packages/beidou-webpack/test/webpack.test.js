@@ -119,7 +119,7 @@ describe('test/webpack.test.js', () => {
 
 
 
-  describe.skip('customer webpack config => function mode', () => {
+  describe('customer webpack config => function mode', () => {
     let app;
     const output = path.join(__dirname, './fixtures/custom-webpack-function/build');
     before((done) => {
@@ -426,7 +426,7 @@ describe('test/webpack.test.js', () => {
 
   });
 
-  describe.skip('isomorphic plugin', () => {
+  describe('isomorphic plugin', () => {
     const output = path.join(__dirname, './fixtures/isomorphic/output');
     let app;
     before((done) => {
@@ -462,7 +462,7 @@ describe('test/webpack.test.js', () => {
       expect(typeof json).to.equal('object');
     });
 
-    it('should exist non-js file content in assets', () => {
+    it.skip('should exist non-js file content in assets', () => {
       const json = require(path.join(output, 'assets.json'));
       expect(json['client/example/index.scss'].bg).to.match(/.+/);
       expect(json['client/images/bg.png']).to.match(
