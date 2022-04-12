@@ -63,7 +63,7 @@
     "egg-bin": "^4.0.0",
     "egg-core": "^4.9.1",
     "egg-mock": "^3.7.1",
-    "node-sass": "^4.10.0",
+    "node-sass": "^7.0.1",
     "react": "^16.2.0",
     "rimraf": "^2.6.1",
     "sass-loader": "^12.6.0",
