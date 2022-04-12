@@ -37,10 +37,10 @@ function getCssLoaderConfig(dev, modules = false) {
     loader: require.resolve('css-loader'),
     options: {
       importLoaders: 1,
-      minimize: !dev,
       sourceMap: dev,
-      modules,
-      localIdentName: modules ? '[local]_[hash:base64:5]' : undefined,
+      modules: {
+        localIdentName: modules ? '[local]_[hash:base64:5]' : undefined,
+      },
     },
   };
 }
