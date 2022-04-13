@@ -38,9 +38,9 @@ function getCssLoaderConfig(dev, modules = false) {
     options: {
       importLoaders: 1,
       sourceMap: dev,
-      modules: {
-        localIdentName: modules ? '[local]_[hash:base64:5]' : undefined,
-      },
+      // minimize: !dev,
+      modules,
+      localIdentName: modules ? '[local]_[hash:base64:5]' : undefined,
     },
   };
 }

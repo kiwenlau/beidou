@@ -28,7 +28,7 @@
     "chokidar": "^2.0.0",
     "codependency": "^2.1.0",
     "colorz": "^0.1.9",
-    "css-loader": "^6.7.1",
+    "css-loader": "^2.1.1",
     "debug": "^2.2.0",
     "deep-equal": "^1.0.1",
     "extend2": "^1.0.0",
