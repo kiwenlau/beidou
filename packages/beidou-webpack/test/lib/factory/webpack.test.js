@@ -70,17 +70,18 @@ describe('test/lib/factory/webpack.test.js', () => {
     assert(cssloader === require.resolve('css-loader'));
   });
 
-  it.skip('define plugin & use plugin', () => {
+  it('define plugin & use plugin', () => {
 
-    factory.definePlugin(webpack.NamedModulesPlugin);
-    let nameModulesPlugin = factory.usePlugin('NamedModulesPlugin');
+    console.log('webpack.DefinePlugin', webpack.DefinePlugin);
+    factory.definePlugin(webpack.DefinePlugin);
+    let nameModulesPlugin = factory.usePlugin('DefinePlugin');
     assert(nameModulesPlugin, 'use plugin error');
 
     let plugins = factory.getDefinePlugins();
-    assert(plugins.NamedModulesPlugin, 'get defined plugins')
+    assert(plugins.DefinePlugin, 'get defined plugins')
     factory.addPlugin(nameModulesPlugin)
     factory.setPlugin(nameModulesPlugin)
-    nameModulesPlugin = factory.getPlugin('NamedModulesPlugin')
+    nameModulesPlugin = factory.getPlugin('DefinePlugin')
     assert(nameModulesPlugin, 'get plugin error');
 
     factory.addPlugin(
