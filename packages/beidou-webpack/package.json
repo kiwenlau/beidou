@@ -55,7 +55,7 @@
     "url-parse": "^1.5.10",
     "webpack": "^5.72.0",
     "webpack-dev-server": "^3.11.3",
-    "webpack-manifest-plugin": "^2.0.4"
+    "webpack-manifest-plugin": "^5.0.0"
   },
   "devDependencies": {
     "chai": "^4.0.2",

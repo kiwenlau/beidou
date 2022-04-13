@@ -342,7 +342,7 @@ describe('test/webpack.test.js', () => {
     });
   });
 
-  describe.skip('webpack build with contenthash', () => {
+  describe('webpack build with contenthash', () => {
     const output = path.join(__dirname, './fixtures/webpack-build-with-contenthash/output');
     const manifest = path.join(__dirname, './fixtures/webpack-build-with-contenthash/.manifest.json');
     let app;
@@ -383,7 +383,7 @@ describe('test/webpack.test.js', () => {
 
   });
 
-  describe.skip('webpack build with custom hashAssetPath', () => {
+  describe('webpack build with custom hashAssetPath', () => {
     const output = path.join(__dirname, './fixtures/webpack-build-with-hashAssetPath/output');
     const manifest = path.join(__dirname, './fixtures/webpack-build-with-hashAssetPath/foo.json')
 
