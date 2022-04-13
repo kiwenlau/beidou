@@ -67,6 +67,9 @@ module.exports = (app, defaultConfig, isDev) => {
           use:[
             {
               loader: MiniCssExtractPlugin.loader,
+              options: {
+                esModule: false,
+              },
             },
             {
               loader: 'css-loader',
@@ -88,6 +91,7 @@ module.exports = (app, defaultConfig, isDev) => {
               loader: 'url-loader',
               options: {
                 limit: 81920,
+                esModule: false,
               },
             },
           ],
