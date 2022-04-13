@@ -161,7 +161,7 @@ describe('test/webpack.test.js', () => {
     });
   })
 
-  describe.skip('customer webpack config => disable css mini plugin', () => {
+  describe('customer webpack config => disable css mini plugin', () => {
     let app;
     const output = path.join(__dirname, './fixtures/custom-webpack-css-extract/build');
     before((done) => {
@@ -201,7 +201,7 @@ describe('test/webpack.test.js', () => {
     });
   })
 
-  describe.skip('customer webpack config => disable css mini plugin with factory', () => {
+  describe('customer webpack config => disable css mini plugin with factory', () => {
     let app;
     const output = path.join(__dirname, './fixtures/factory-webpack-css-extract/build');
     before((done) => {
