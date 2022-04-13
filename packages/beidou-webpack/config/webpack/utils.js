@@ -32,15 +32,16 @@ const fileLoaderConfig = {
   },
 };
 
-function getCssLoaderConfig(dev, modules = false) {
+function getCssLoaderConfig(dev) {
   return {
     loader: require.resolve('css-loader'),
     options: {
       importLoaders: 1,
       sourceMap: dev,
       // minimize: !dev,
-      modules,
-      localIdentName: modules ? '[local]_[hash:base64:5]' : undefined,
+      modules: {
+        localIdentName: dev ? '[path][name]__[local]' : '[hash:base64]',
+      },
     },
   };
 }
