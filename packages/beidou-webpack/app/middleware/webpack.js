@@ -44,7 +44,6 @@ module.exports = function (options, app) {
         resolve(true);
       });
 
-      // catch error
       webpackRequest.on('error', () => {
         resolve(true);
       });

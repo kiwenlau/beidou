@@ -109,7 +109,6 @@ IsomorphicPlugin.prototype.parseForConfig = function (module, config) {
   // if set `include`, test it, works together with `exclude`
   if (config.include && !config.include.test(module.name)) return null;
   // TODO: clean-css if needed
-  debug('module', module);
   return {
     content: module.source,
     name: module.name,
@@ -137,12 +136,18 @@ IsomorphicPlugin.prototype.save = function (results) {
 
     const m = new Module(absolutePath);
     try {
-      debug({ filePath, result, absolutePath });
       m._compile(result.content, absolutePath);
       const { exports } = m;
       json[relativePath] = exports;
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(
+        'IsomorphicPlugin.prototype.save fail: ',
+        error,
+        '\nabsolutePath: ',
+        absolutePath,
+        '\nresult: ',
+        result
+      );
     }
   }
   const content = JSON.stringify(json, null, '  ');

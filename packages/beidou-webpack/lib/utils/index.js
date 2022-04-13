@@ -74,8 +74,9 @@ const dumpWebpackConfig = function (agent, config) {
         2
       )
     );
-  } catch (err) {
-    agent.logger.warn(`dumpConfig error: ${err.message}`);
+  } catch (error) {
+    console.error('dumpWebpackConfig fail: ', error);
+    agent.logger.warn(`dumpConfig error: ${error.message}`);
   }
 };
 
@@ -90,7 +91,8 @@ function parseDevFromArgv() {
       dev = args.dev !== 'false';
     }
     return dev;
-  } catch (e) {
+  } catch (error) {
+    console.error('parseDevFromArgv faile: ', error, '\nargv: ', argv);
     return false;
   }
 }
