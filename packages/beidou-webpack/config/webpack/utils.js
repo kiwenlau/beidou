@@ -76,7 +76,9 @@ const lessLoaderConfig = {
 function getStyleCongfigs(dev, options) {
   const extractLoader = {
     loader: MiniCssExtractPlugin.loader,
-    options: {},
+    options: {
+      esModule: false,
+    },
   };
   const styleLoader = {
     loader: require.resolve('style-loader'),
