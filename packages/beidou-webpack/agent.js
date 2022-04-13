@@ -2,7 +2,7 @@
 
 const chokidar = require('chokidar');
 const equal = require('deep-equal');
-const debug = require('debug')('beidou:webpack');
+const debug = require('debug')('beidou-webpack');
 const helper = require('./lib/utils');
 const entryLoader = require('./lib/loader/entry-loader');
 
@@ -14,9 +14,12 @@ module.exports = (agent) => {
     const { logger } = agent;
     const config = agent.config.webpack;
 
-    debug('create webpack server with config: %O', config);
+    debug(
+      'create webpack server with config: ',
+      JSON.stringify(config, null, 4)
+    );
     const webpackConfig = helper.getWebpackConfig(agent, config);
-    debug('Webpack config: %O', webpackConfig);
+    debug('Webpack config: ', JSON.stringify(webpackConfig, null, 4));
     // const webpackServer = http.createServer(agent.callback());
 
     const port = webpackConfig.devServer.port || 0;

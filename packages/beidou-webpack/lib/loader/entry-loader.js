@@ -2,7 +2,7 @@
 
 const path = require('path');
 const glob = require('glob');
-const debug = require('debug')('beidou:webpack');
+const debug = require('debug')('beidou-webpack');
 
 /**
  * Search for entries

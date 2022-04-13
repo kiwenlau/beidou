@@ -4,6 +4,7 @@ const is = require('is');
 const Plugin = require('./plugin');
 const Rule = require('./rule');
 const extend = require('extend2');
+const debug = require('debug')('beidou-webpack');
 
 function toType(obj) {
   return {}.toString
@@ -149,6 +150,7 @@ class WebpackFactory extends Factory {
   }
 
   addPlugin(...args) {
+    debug('addPlugin: ', args);
     if (args.length === 1 && is.string(args[0])) {
       if (this.usePlugin(args[0])) {
         const plugin = this.usePlugin(args[0]);
@@ -243,27 +245,25 @@ class WebpackFactory extends Factory {
 
   getRule(params) {
     if (is.string(params)) {
-      return this.__rules.find(
-        v => {
-          if (v.alias === params) {
+      return this.__rules.find((v) => {
+        if (v.alias === params) {
+          return true;
+        }
+        if (v.options && v.options.test) {
+          const regexps = v.options.test;
+
+          if (Array.isArray(regexps)) {
+            for (const regexp of regexps) {
+              if (regexp.test && regexp.test(params)) {
+                return true;
+              }
+            }
+          } else if (regexps instanceof RegExp && regexps.test(params)) {
             return true;
           }
-          if (v.options && v.options.test) {
-            const regexps = v.options.test;
-
-            if (Array.isArray(regexps)) {
-              for (const regexp of regexps) {
-                if (regexp.test && regexp.test(params)) {
-                  return true;
-                }
-              }
-            } else if (regexps instanceof RegExp && regexps.test(params)) {
-              return true;
-            }
-          }
-          return false;
         }
-      );
+        return false;
+      });
     } else if (is.function(params)) {
       for (const rule of this.__rules) {
         if (params(rule)) {
