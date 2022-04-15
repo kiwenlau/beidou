@@ -67,7 +67,7 @@ IsomorphicPlugin.prototype.apply = function (compiler) {
   }
 
   const cb = (stats) => {
-    const json = stats.toJson();
+    const json = stats.toJson({ source: true });
 
     debug('webpack compile json:\n', JSON.stringify(json, null, 2));
     const results = json.modules
@@ -139,8 +139,15 @@ IsomorphicPlugin.prototype.save = function (results) {
       m._compile(result.content, absolutePath);
       const { exports } = m;
       json[relativePath] = exports;
-    } catch (e) {
-      // do nothing
+    } catch (error) {
+      console.error(
+        'IsomorphicPlugin.prototype.save fail: ',
+        error,
+        '\nresult: ',
+        result,
+        '\nabsolutePath: ',
+        absolutePath
+      );
     }
   }
   const content = JSON.stringify(json, null, '  ');
