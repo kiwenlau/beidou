@@ -13,7 +13,7 @@ module.exports = appInfo => ({
     mode: 'development',
     output: {
       path: './build',
-      filename: '[name].js?[hash]',
+      filename: '[name].js?[contenthash]',
       chunkFilename: '[name].js',
       publicPath: '/build/',
     },

@@ -44,7 +44,7 @@ module.exports = (app, defaultConfig, isDev) => {
     entry: defaultConfig.entry,
     output: {
       path: outputPath,
-      filename: '[name].js?[hash]',
+      filename: '[name].js?[contenthash]',
       chunkFilename: '[name].js',
       publicPath: app.config.webpack.publicPath,
     },

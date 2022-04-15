@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: outputPath,
-    filename: '[name].js?[hash]',
+    filename: '[name].js?[contenthash]',
     chunkFilename: '[name].js',
     publicPath: '/build/',
   },
