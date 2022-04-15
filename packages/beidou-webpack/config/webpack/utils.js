@@ -49,16 +49,18 @@ function getCssLoaderConfig(dev, modules = false) {
 const postCssLoaderConfig = {
   loader: require.resolve('postcss-loader'),
   options: {
-    // Necessary for external CSS imports to work
-    ident: 'postcss',
-    plugins: () => [
-      require('postcss-flexbugs-fixes'),
-      autoprefixer({
-        // browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
-        // please set browserslist in package.json
-        flexbox: 'no-2009',
-      }),
-    ],
+    postcssOptions: {
+      // Necessary for external CSS imports to work
+      ident: 'postcss',
+      plugins: () => [
+        require('postcss-flexbugs-fixes'),
+        autoprefixer({
+          // browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
+          // please set browserslist in package.json
+          flexbox: 'no-2009',
+        }),
+      ],
+    },
   },
 };
 
