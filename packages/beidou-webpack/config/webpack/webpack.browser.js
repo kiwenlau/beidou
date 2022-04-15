@@ -7,7 +7,7 @@ process.traceDeprecation = true;
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const { common } = require('./webpack.common');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const {
   imageLoaderConfig,
   fileLoaderConfig,
@@ -107,7 +107,7 @@ module.exports = (app, entry, dev) => {
 
   if (viewConfig && viewConfig.useHashAsset && !dev) {
     factory.addPlugin(
-      ManifestPlugin,
+      WebpackManifestPlugin,
       { fileName: viewConfig.hashAssetPath, publicPath: '' },
       'WebpackManifestPlugin'
     );
