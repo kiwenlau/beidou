@@ -75,7 +75,6 @@ function getStyleCongfigs(dev, options) {
   const extractLoader = {
     loader: MiniCssExtractPlugin.loader,
     options: {
-      hmr: dev,
       esModule: false,
     },
   };
