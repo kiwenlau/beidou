@@ -92,6 +92,9 @@ module.exports = (app, defaultConfig, entry, isDev) => {
     use:[
       {
         loader: MiniCssExtractPlugin.loader,
+        options: {
+          esModule: false,
+        },
       },
       {
         loader: 'css-loader',
