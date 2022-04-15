@@ -79,9 +79,6 @@ function getStyleCongfigs(dev, options) {
   };
   const styleLoader = {
     loader: require.resolve('style-loader'),
-    options: {
-      hmr: dev,
-    },
   };
 
   const defaultLoader = options.cssExtract ? extractLoader : styleLoader;
