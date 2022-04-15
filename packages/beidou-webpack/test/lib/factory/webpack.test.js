@@ -72,16 +72,16 @@ describe('test/lib/factory/webpack.test.js', () => {
 
   it('define plugin & use plugin', () => {
 
-    factory.definePlugin(webpack.NamedModulesPlugin);
-    let nameModulesPlugin = factory.usePlugin('NamedModulesPlugin');
-    assert(nameModulesPlugin, 'use plugin error');
+    factory.definePlugin(webpack.DefinePlugin);
+    let definePlugin = factory.usePlugin('DefinePlugin');
+    assert(definePlugin, 'use plugin error');
 
     let plugins = factory.getDefinePlugins();
-    assert(plugins.NamedModulesPlugin, 'get defined plugins')
-    factory.addPlugin(nameModulesPlugin)
-    factory.setPlugin(nameModulesPlugin)
-    nameModulesPlugin = factory.getPlugin('NamedModulesPlugin')
-    assert(nameModulesPlugin, 'get plugin error');
+    assert(plugins.DefinePlugin, 'get defined plugins')
+    factory.addPlugin(definePlugin)
+    factory.setPlugin(definePlugin)
+    definePlugin = factory.getPlugin('DefinePlugin')
+    assert(definePlugin, 'get plugin error');
 
     factory.addPlugin(
       webpack.DefinePlugin,
