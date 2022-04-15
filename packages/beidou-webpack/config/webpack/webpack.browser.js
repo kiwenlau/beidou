@@ -75,7 +75,7 @@ module.exports = (app, entry, dev) => {
     factory.set('optimization', {
       minimizer: [
         new TerserPlugin({
-          parallel: true,
+          parallel: false,
           extractComments: false,
         }),
       ],
