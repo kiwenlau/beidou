@@ -462,7 +462,7 @@ describe('test/webpack.test.js', () => {
       expect(typeof json).to.equal('object');
     });
 
-    it.skip('should exist non-js file content in assets', () => {
+    it('should exist non-js file content in assets', () => {
       const json = require(path.join(output, 'assets.json'));
       expect(json['client/example/index.scss'].bg).to.match(/.+/);
       expect(json['client/images/bg.png']).to.match(
