@@ -26,7 +26,7 @@ module.exports = (app, entry, dev) => {
   [
     {
       test: /\.(js|jsx|ts|tsx|mjs)$/,
-      exclude: /node_modules/,
+      exclude: /(node_modules|app)/,
       use: {
         loader: require.resolve('babel-loader'),
         options: {
@@ -95,11 +95,11 @@ module.exports = (app, entry, dev) => {
       'DefinePlugin'
     );
 
-    factory.setPlugin(
-      webpack.HotModuleReplacementPlugin,
-      null,
-      'HotModuleReplacementPlugin'
-    );
+    // factory.setPlugin(
+    //   webpack.HotModuleReplacementPlugin,
+    //   null,
+    //   'HotModuleReplacementPlugin'
+    // );
   }
   if (custom.cssExtract) {
     factory.addPlugin('MiniCssExtractPlugin');

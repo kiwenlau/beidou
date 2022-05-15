@@ -55,7 +55,7 @@ module.exports = appInfo => ({
         colors: true,
         chunks: false,
       },
-      publicPath: '/build/',
+      // publicPath: '/build/',
       hot: true,
     },
   },

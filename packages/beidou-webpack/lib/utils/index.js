@@ -152,19 +152,19 @@ const getWebpackConfig = (app, options = {}, target = 'browser') => {
     devServer.port = defaultPort;
   }
 
-  if (devServer.contentBase !== false) {
-    app.logger.warn(
-      '[webpack] devServer.contentBase: %s, if ' +
-        'webpack.devServer.contentBase is not false may cause beidou' +
-        ' server unreachable',
-      devServer.contentBase
-    );
-    devServer.contentBase = false;
-  }
+  // if (devServer.contentBase !== false) {
+  //   app.logger.warn(
+  //     '[webpack] devServer.contentBase: %s, if ' +
+  //       'webpack.devServer.contentBase is not false may cause beidou' +
+  //       ' server unreachable',
+  //     devServer.contentBase
+  //   );
+  //   devServer.contentBase = false;
+  // }
 
-  if (!devServer.publicPath) {
-    devServer.publicPath = webpackConfig.output.publicPath || '/build';
-  }
+  // if (!devServer.publicPath) {
+  //   devServer.publicPath = webpackConfig.output.publicPath || '/build';
+  // }
 
   return webpackConfig;
 };
@@ -212,7 +212,10 @@ const startServer = (config, port, logger, agent) => {
 
   const server = new WebpackDevServer(compiler, config.devServer);
 
-  server.middleware.waitUntilValid(() => {
+  const middleware = require('webpack-dev-middleware');
+  const instance = middleware(compiler);
+
+  instance.waitUntilValid(() => {
     logger.info('[webpack] webpack server start, listen on port: %s', port);
     printEntry(config.entry);
     process.send({ action: 'webpack-server-ready', to: 'app', data: { port } });
