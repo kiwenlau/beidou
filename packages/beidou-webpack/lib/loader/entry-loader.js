@@ -59,7 +59,9 @@ module.exports = (app, devServer = {}, dev = false, depth = 1) => {
   if (dev && (devServer.hot || devServer.hotOnly)) {
     const port = devServer.port || app.options.port;
     headEntries = [
-      `${require.resolve('webpack-dev-server/client')}?http://0.0.0.0:${port}`,
+      `${require.resolve(
+        'webpack-dev-server/client'
+      )}?hot=true&live-reload=true&port=${port}`,
       require.resolve('webpack/hot/only-dev-server'),
     ];
   }
