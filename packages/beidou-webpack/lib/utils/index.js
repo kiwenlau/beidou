@@ -210,12 +210,9 @@ const startServer = (config, port, logger, agent) => {
     compiler.plugin('done', cb);
   }
 
-  const server = new WebpackDevServer(compiler, config.devServer);
+  const server = new WebpackDevServer(config.devServer, compiler);
 
-  const middleware = require('webpack-dev-middleware');
-  const instance = middleware(compiler);
-
-  instance.waitUntilValid(() => {
+  server.startCallback(() => {
     logger.info('[webpack] webpack server start, listen on port: %s', port);
     printEntry(config.entry);
     process.send({ action: 'webpack-server-ready', to: 'app', data: { port } });
@@ -235,11 +232,7 @@ const startServer = (config, port, logger, agent) => {
       process.removeListener('message', portMessageHandler);
     };
   });
-  server.listen(port, '0.0.0.0', (err) => {
-    if (err) {
-      logger.error('[Beidou Agent] webpack server start failed,', err);
-    }
-  });
+
   agent[symbol] = server;
   // dump config
   dumpWebpackConfig(agent, config);
