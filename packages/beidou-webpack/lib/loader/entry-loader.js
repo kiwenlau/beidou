@@ -57,12 +57,12 @@ module.exports = (app, devServer = {}, dev = false, depth = 1) => {
   const entry = {};
   let headEntries = [];
   if (dev && (devServer.hot || devServer.hotOnly)) {
-    const port = devServer.port || app.options.port;
+    // const port = devServer.port || app.options.port;
     headEntries = [
-      `${require.resolve(
-        'webpack-dev-server/client'
-      )}?hot=true&live-reload=true&port=${port}`,
-      require.resolve('webpack/hot/only-dev-server'),
+      // `${require.resolve(
+      //   'webpack-dev-server/client'
+      // )}?hot=true&live-reload=true&port=${port}`,
+      // require.resolve('webpack/hot/only-dev-server'),
     ];
   }
 
