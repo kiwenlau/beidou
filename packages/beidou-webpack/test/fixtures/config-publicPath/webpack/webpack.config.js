@@ -29,7 +29,6 @@ module.exports = {
     extensions: ['.json', '.js', '.jsx'],
   },
   devServer: {
-    contentBase: false,
     port: 6003,
   },
 };
