@@ -59,5 +59,8 @@
     }
   },
   "repository": "https://github.com/alibaba/beidou",
-  "dependencies": {}
+  "dependencies": {
+    "mini-css-extract-plugin": "^2.6.0"
+  },
+  "__npminstall_done": false
 }
