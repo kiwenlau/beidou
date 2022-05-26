@@ -28,21 +28,24 @@ module.exports = {
   resolve: {
     extensions: ['.json', '.js', '.jsx'],
   },
+  watchOptions: {
+    aggregateTimeout: 300,
+  },
+  experiments: {
+    lazyCompilation: false,
+  },
   devServer: {
-    contentBase: false,
-    noInfo: true,
-    quiet: false,
-    clientLogLevel: 'warning',
-    lazy: false,
-    watchOptions: {
-      aggregateTimeout: 300,
+    client: {
+      logging: 'warn',
     },
     headers: { 'X-Custom-Header': 'yes' },
-    stats: {
-      colors: true,
-      chunks: false,
+    devMiddleware: {
+      stats: {
+        colors: true,
+        chunks: false,
+      },
+      publicPath: '/build/',
     },
-    publicPath: '/build/',
     hot: true,
     proxy: {
       '/foo': {
