@@ -1,8 +1,6 @@
 'use strict';
 
 const path = require('path');
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (app, defaultConfig, entry, isDev) => {
   const outputPath = path.join(app.config.baseDir, 'build');
@@ -19,20 +17,18 @@ module.exports = (app, defaultConfig, entry, isDev) => {
       publicPath: '/build/',
     },
     module: {
-      "strictExportPresence": true,
+      strictExportPresence: true,
     },
     resolve: {
       extensions: ['.json', '.js', '.jsx'],
       alias: {
-        "client": "../client"
+        client: '../client',
       },
     },
     devServer: {
       publicPath: '/build',
-    }
+    },
   });
 
   return factory.getConfig();
-
-
 };
