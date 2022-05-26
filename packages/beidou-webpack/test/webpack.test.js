@@ -13,10 +13,9 @@ const framework = path.join(__dirname, '../../beidou-core/');
 const plugin = 'webpack';
 
 describe('test/webpack.test.js', () => {
-
   describe('use default webpack config', () => {
     let app;
-    before((done) => {
+    before(done => {
       app = mm.cluster({
         baseDir: './default-webpack-config',
         plugin,
@@ -31,19 +30,19 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should get output for single file entry', (done) => {
+    it('should get output for single file entry', done => {
       request(app.callback())
         .get('/build/index.js')
         .expect(200, done);
     });
 
-    it('should get output for directories entry', (done) => {
+    it('should get output for directories entry', done => {
       request(app.callback())
         .get('/build/foo.js')
         .expect(200, done);
     });
 
-    it('should get 404 when request a non-existent folder', (done) => {
+    it('should get 404 when request a non-existent folder', done => {
       request(app.callback())
         .get('/build/')
         .expect(404, done);
@@ -89,7 +88,7 @@ describe('test/webpack.test.js', () => {
 
   describe('use customized webpack config', () => {
     let app;
-    before((done) => {
+    before(done => {
       app = mm.cluster({
         baseDir: './custom-webpack-config',
         plugin,
@@ -104,25 +103,26 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should get output file by customized config', (done) => {
+    it('should get output file by customized config', done => {
       request(app.callback())
         .get('/build/main.js')
         .expect(200, done);
     });
 
-    it('should get 404 when request a non-existent folder', (done) => {
+    it('should get 404 when request a non-existent folder', done => {
       request(app.callback())
         .get('/build/')
         .expect(404, done);
     });
   });
 
-
-
   describe('customer webpack config => function mode', () => {
     let app;
-    const output = path.join(__dirname, './fixtures/custom-webpack-function/build');
-    before((done) => {
+    const output = path.join(
+      __dirname,
+      './fixtures/custom-webpack-function/build'
+    );
+    before(done => {
       app = mm.app({
         baseDir: './custom-webpack-function',
         plugin,
@@ -136,7 +136,7 @@ describe('test/webpack.test.js', () => {
       });
     });
 
-    after((done) => {
+    after(done => {
       if (fs.existsSync(output)) {
         rimraf(output, done);
       }
@@ -146,25 +146,28 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should exist build files', (done) => {
+    it('should exist build files', done => {
       const exist = fs.existsSync(path.join(output, 'index.js'));
       expect(exist).to.equal(true);
       done();
     });
 
-    it('should modify the css module plugin ', (done) => {
+    it('should modify the css module plugin ', done => {
       const example = fs.existsSync(path.join(output, 'example.css'));
       expect(example).to.equal(false);
       const exist = fs.existsSync(path.join(output, 'example.modify.css'));
       expect(exist).to.equal(true);
       done();
     });
-  })
+  });
 
   describe('customer webpack config => disable css mini plugin', () => {
     let app;
-    const output = path.join(__dirname, './fixtures/custom-webpack-css-extract/build');
-    before((done) => {
+    const output = path.join(
+      __dirname,
+      './fixtures/custom-webpack-css-extract/build'
+    );
+    before(done => {
       app = mm.app({
         baseDir: './custom-webpack-css-extract',
         plugin,
@@ -178,7 +181,7 @@ describe('test/webpack.test.js', () => {
       });
     });
 
-    after((done) => {
+    after(done => {
       if (fs.existsSync(output)) {
         rimraf(output, done);
       }
@@ -188,23 +191,26 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should exist build files', (done) => {
+    it('should exist build files', done => {
       const exist = fs.existsSync(path.join(output, 'index.js'));
       expect(exist).to.equal(true);
       done();
     });
 
-    it('should disable the css module plugin ', (done) => {
+    it('should disable the css module plugin ', done => {
       const example = fs.existsSync(path.join(output, 'example.css'));
       expect(example).to.equal(false);
       done();
     });
-  })
+  });
 
   describe('customer webpack config => disable css mini plugin with factory', () => {
     let app;
-    const output = path.join(__dirname, './fixtures/factory-webpack-css-extract/build');
-    before((done) => {
+    const output = path.join(
+      __dirname,
+      './fixtures/factory-webpack-css-extract/build'
+    );
+    before(done => {
       app = mm.app({
         baseDir: './factory-webpack-css-extract',
         plugin,
@@ -218,7 +224,7 @@ describe('test/webpack.test.js', () => {
       });
     });
 
-    after((done) => {
+    after(done => {
       if (fs.existsSync(output)) {
         rimraf(output, done);
       }
@@ -228,22 +234,22 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should exist build files', (done) => {
+    it('should exist build files', done => {
       const exist = fs.existsSync(path.join(output, 'index.js'));
       expect(exist).to.equal(true);
       done();
     });
 
-    it('should disable the css module plugin ', (done) => {
+    it('should disable the css module plugin ', done => {
       const example = fs.existsSync(path.join(output, 'example.css'));
       expect(example).to.equal(false);
       done();
     });
-  })
+  });
 
   describe('config publicPath', () => {
     let app;
-    before((done) => {
+    before(done => {
       app = mm.cluster({
         baseDir: './config-publicPath',
         plugin,
@@ -259,21 +265,21 @@ describe('test/webpack.test.js', () => {
     afterEach(mm.restore);
 
     // request to /static avaliable
-    it('should get static file by publicPath config', (done) => {
+    it('should get static file by publicPath config', done => {
       request(app.callback())
         .get('/static/main.js')
         .expect(200, done);
     });
 
     // request to /build not avaliable
-    it('should get 404 when try to get build file of default webpack config', (done) => {
+    it('should get 404 when try to get build file of default webpack config', done => {
       request(app.callback())
         .get('/build/main.js')
         .expect(404, done);
     });
 
     // router works
-    it('should router work', (done) => {
+    it('should router work', done => {
       request(app.callback())
         .get('/test')
         .expect('test')
@@ -283,7 +289,7 @@ describe('test/webpack.test.js', () => {
 
   describe('config path and enable HMR', () => {
     let app;
-    before((done) => {
+    before(done => {
       app = mm.cluster({
         baseDir: './hot-module-reload',
         plugin,
@@ -298,7 +304,7 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should get websocket info', (done) => {
+    it('should get websocket info', done => {
       request(app.callback())
         .get('/sockjs-node/info')
         .expect(200, done);
@@ -308,7 +314,7 @@ describe('test/webpack.test.js', () => {
   describe('webpack build', () => {
     const output = path.join(__dirname, './fixtures/webpack-build/output');
     let app;
-    before((done) => {
+    before(done => {
       app = mm.app({
         baseDir: './webpack-build',
         plugin,
@@ -323,7 +329,7 @@ describe('test/webpack.test.js', () => {
       });
     });
 
-    after((done) => {
+    after(done => {
       if (fs.existsSync(output)) {
         rimraf(output, done);
       }
@@ -333,7 +339,7 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should exist output files', (done) => {
+    it('should exist output files', done => {
       expect(fs.existsSync(path.join(output, 'index.js'))).to.equal(true);
       expect(fs.existsSync(path.join(output, 'bar.js'))).to.equal(true);
       expect(fs.existsSync(path.join(output, 'foo.js'))).to.equal(true);
@@ -343,10 +349,16 @@ describe('test/webpack.test.js', () => {
   });
 
   describe('webpack build with contenthash', () => {
-    const output = path.join(__dirname, './fixtures/webpack-build-with-contenthash/output');
-    const manifest = path.join(__dirname, './fixtures/webpack-build-with-contenthash/.manifest.json');
+    const output = path.join(
+      __dirname,
+      './fixtures/webpack-build-with-contenthash/output'
+    );
+    const manifest = path.join(
+      __dirname,
+      './fixtures/webpack-build-with-contenthash/.manifest.json'
+    );
     let app;
-    before((done) => {
+    before(done => {
       app = mm.app({
         baseDir: './webpack-build-with-contenthash',
         plugin,
@@ -360,7 +372,7 @@ describe('test/webpack.test.js', () => {
       });
     });
 
-    after((done) => {
+    after(done => {
       rimraf.sync(manifest);
       if (fs.existsSync(output)) {
         rimraf(output, done);
@@ -371,24 +383,41 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should exist output assets with contenthash', (done) => {
-      expect(fs.existsSync(path.join(output, '../.manifest.json'))).to.equal(true);
-      expect(glob.sync(path.join(output, 'index_????????.js')).length).to.equal(1);
-      expect(glob.sync(path.join(output, 'bar_????????.js')).length).to.equal(1);
-      expect(glob.sync(path.join(output, 'bar_????????.css')).length).to.equal(1);
-      expect(glob.sync(path.join(output, 'foo_????????.js')).length).to.equal(1);
-      expect(glob.sync(path.join(output, 'bar/foo_????????.js')).length).to.equal(1);
+    it('should exist output assets with contenthash', done => {
+      expect(fs.existsSync(path.join(output, '../.manifest.json'))).to.equal(
+        true
+      );
+      expect(glob.sync(path.join(output, 'index_????????.js')).length).to.equal(
+        1
+      );
+      expect(glob.sync(path.join(output, 'bar_????????.js')).length).to.equal(
+        1
+      );
+      expect(glob.sync(path.join(output, 'bar_????????.css')).length).to.equal(
+        1
+      );
+      expect(glob.sync(path.join(output, 'foo_????????.js')).length).to.equal(
+        1
+      );
+      expect(
+        glob.sync(path.join(output, 'bar/foo_????????.js')).length
+      ).to.equal(1);
       done();
     });
-
   });
 
   describe('webpack build with custom hashAssetPath', () => {
-    const output = path.join(__dirname, './fixtures/webpack-build-with-hashAssetPath/output');
-    const manifest = path.join(__dirname, './fixtures/webpack-build-with-hashAssetPath/foo.json')
+    const output = path.join(
+      __dirname,
+      './fixtures/webpack-build-with-hashAssetPath/output'
+    );
+    const manifest = path.join(
+      __dirname,
+      './fixtures/webpack-build-with-hashAssetPath/foo.json'
+    );
 
     let app;
-    before((done) => {
+    before(done => {
       app = mm.app({
         baseDir: './webpack-build-with-hashAssetPath',
         plugin,
@@ -403,7 +432,7 @@ describe('test/webpack.test.js', () => {
       });
     });
 
-    after((done) => {
+    after(done => {
       rimraf.sync(manifest);
       if (fs.existsSync(output)) {
         rimraf(output, done);
@@ -414,22 +443,31 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should exist output assets with contenthash', (done) => {
+    it('should exist output assets with contenthash', done => {
       expect(fs.existsSync(path.join(output, '../foo.json'))).to.equal(true);
-      expect(glob.sync(path.join(output, 'index_????????.js')).length).to.equal(1);
-      expect(glob.sync(path.join(output, 'bar_????????.js')).length).to.equal(1);
-      expect(glob.sync(path.join(output, 'bar_????????.css')).length).to.equal(1);
-      expect(glob.sync(path.join(output, 'foo_????????.js')).length).to.equal(1);
-      expect(glob.sync(path.join(output, 'bar/foo_????????.js')).length).to.equal(1);
+      expect(glob.sync(path.join(output, 'index_????????.js')).length).to.equal(
+        1
+      );
+      expect(glob.sync(path.join(output, 'bar_????????.js')).length).to.equal(
+        1
+      );
+      expect(glob.sync(path.join(output, 'bar_????????.css')).length).to.equal(
+        1
+      );
+      expect(glob.sync(path.join(output, 'foo_????????.js')).length).to.equal(
+        1
+      );
+      expect(
+        glob.sync(path.join(output, 'bar/foo_????????.js')).length
+      ).to.equal(1);
       done();
     });
-
   });
 
   describe('isomorphic plugin', () => {
     const output = path.join(__dirname, './fixtures/isomorphic/output');
     let app;
-    before((done) => {
+    before(done => {
       app = mm.app({
         baseDir: './isomorphic',
         plugin,
@@ -445,7 +483,7 @@ describe('test/webpack.test.js', () => {
       // app.ready(done);
     });
 
-    after((done) => {
+    after(done => {
       app.close();
       rimraf(output, done);
     });
@@ -473,7 +511,7 @@ describe('test/webpack.test.js', () => {
 
   describe('webpack-proxy', () => {
     let app;
-    before((done) => {
+    before(done => {
       app = mm.cluster({
         baseDir: './webpack-proxy',
         plugin,
@@ -489,13 +527,13 @@ describe('test/webpack.test.js', () => {
 
     afterEach(mm.restore);
 
-    it('should get 200 statusCode for GET /foo', (done) => {
+    it('should get 200 statusCode for GET /foo', done => {
       request(app.callback())
         .get('/foo')
         .expect(200, done);
     });
 
-    it('should get 200 statusCode for POST /foo', (done) => {
+    it('should get 200 statusCode for POST /foo', done => {
       request(app.callback())
         .post('/foo')
         .set('Content-Type', 'application/json')
@@ -503,7 +541,7 @@ describe('test/webpack.test.js', () => {
         .expect(200, done);
     });
 
-    it('should get 200 statusCode for form post', (done) => {
+    it('should get 200 statusCode for form post', done => {
       request(app.callback())
         .post('/foo')
         .type('form')
@@ -511,12 +549,10 @@ describe('test/webpack.test.js', () => {
         .expect(200, done);
     });
 
-    it('should get 200 statusCode for GET /proxy', (done) => {
+    it('should get 200 statusCode for GET /proxy', done => {
       request(app.callback())
         .get('/proxy')
         .expect(200, done);
     });
-
   });
-
 });
