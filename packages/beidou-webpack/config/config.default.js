@@ -41,22 +41,26 @@ module.exports = appInfo => ({
     },
 
     devServer: {
-      contentBase: false,
       port: 6002,
-      noInfo: true,
-      quiet: false,
-      clientLogLevel: 'warning',
-      lazy: false,
-      watchOptions: {
-        aggregateTimeout: 300,
-      },
       headers: { 'X-Custom-Header': 'yes' },
-      stats: {
-        colors: true,
-        chunks: false,
-      },
-      // publicPath: '/build/',
       hot: true,
+      devMiddleware: {
+        stats: {
+          colors: true,
+          chunks: false,
+        },
+        publicPath: '/build/',
+      },
+      static: {
+        watch: true,
+      },
+      client: {
+        logging: 'warn',
+      },
+    },
+
+    experiments: {
+      lazyCompilation: false,
     },
   },
 });
