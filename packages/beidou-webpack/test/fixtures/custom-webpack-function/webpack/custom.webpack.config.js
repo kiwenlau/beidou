@@ -23,45 +23,51 @@ module.exports = (app, defaultConfig, entry, isDev) => {
       publicPath: '/build/',
     },
     module: {
-      "strictExportPresence": true,
+      strictExportPresence: true,
     },
     resolve: {
       extensions: ['.json', '.js', '.jsx'],
       alias: {
-        "client": "../client"
+        client: '../client',
       },
     },
     devServer: {
       publicPath: '/build',
-    }
+    },
   });
 
-
   factory.addPlugin(
-    webpack.DefinePlugin, {
+    webpack.DefinePlugin,
+    {
       'process.env.NODE_ENV': JSON.stringify(
         isDev ? 'development' : 'production'
       ),
       __CLIENT__: true,
-    }, 'DefinePlugin')
+    },
+    'DefinePlugin'
+  );
 
   factory
-    .addPlugin(new webpack.ProgressPlugin((percentage, msg) => {
-      const stream = process.stderr;
-      if (stream.isTTY && percentage < 0.71) {
-        stream.cursorTo(0);
-        stream.write(`📦   ${msg}`);
-        stream.clearLine(1);
-      }
-    })) 
+    .addPlugin(
+      new webpack.ProgressPlugin((percentage, msg) => {
+        const stream = process.stderr;
+        if (stream.isTTY && percentage < 0.71) {
+          stream.cursorTo(0);
+          stream.write(`📦   ${msg}`);
+          stream.clearLine(1);
+        }
+      })
+    )
     .addPlugin(new app.IsomorphicPlugin(universal))
-    .addPlugin(new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }))
+    .addPlugin(
+      new MiniCssExtractPlugin({
+        filename: '[name].css',
+      })
+    );
 
   // 切换环境
-  const factoryInDev = factory.env('dev')
-  factoryInDev.addPlugin(new webpack.HotModuleReplacementPlugin())
+  const factoryInDev = factory.env('dev');
+  factoryInDev.addPlugin(new webpack.HotModuleReplacementPlugin());
 
   // 原环境加载
   // factory.addPlugin(new webpack.optimize.UglifyJsPlugin({
@@ -70,9 +76,11 @@ module.exports = (app, defaultConfig, entry, isDev) => {
   //   },
   // }))
 
-  factory.setPlugin(new MiniCssExtractPlugin({
-    filename: '[name].modify.css',
-  }))
+  factory.setPlugin(
+    new MiniCssExtractPlugin({
+      filename: '[name].modify.css',
+    })
+  );
 
   factory.addRule({
     test: /\.jsx?$/,
@@ -84,12 +92,12 @@ module.exports = (app, defaultConfig, entry, isDev) => {
         presets: ['beidou-client'],
       },
     },
-  })
+  });
 
   factory.addRule({
     test: /\.scss$/,
     exclude: /node_modules/,
-    use:[
+    use: [
       {
         loader: MiniCssExtractPlugin.loader,
         options: {
@@ -107,11 +115,8 @@ module.exports = (app, defaultConfig, entry, isDev) => {
       {
         loader: 'sass-loader',
       },
-    
-    ]
-  })
+    ],
+  });
 
   return factory.getConfig();
-
-
 };
