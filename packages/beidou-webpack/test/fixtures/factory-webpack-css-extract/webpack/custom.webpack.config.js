@@ -28,7 +28,9 @@ module.exports = (app, defaultConfig, entry, isDev) => {
       },
     },
     devServer: {
-      publicPath: '/build',
+      devMiddleware: {
+        publicPath: '/build/',
+      },
     },
   });
 
