@@ -29,6 +29,8 @@ module.exports = {
     extensions: ['.json', '.js', '.jsx'],
   },
   devServer: {
-    publicPath: '/build',
+    devMiddleware: {
+      publicPath: '/build/',
+    },
   },
 };
